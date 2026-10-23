@@ -1,17 +1,30 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+      Anuncios
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      @for(anuncio of anuncios; track anuncio.imagen){
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-padding">
+          <div>
+            <!-- style="border: 1px solid white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 2, 0.1); background: white;" -->
+            
+            <img 
+              [src]="anuncio.imagen" 
+              alt="Imagen del Anuncio" 
+              style="width: 100%; height: auto; display: block;" 
+            />
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
-</ion-content>
+          </div>
+        </ion-col>
+
+
+      }
+    </ion-row>
+  </ion-grid>
+ </ion-content>
