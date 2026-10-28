@@ -11,19 +11,16 @@
     <ion-row>
       @for(anuncio of anuncios; track anuncio.imagen){
         <ion-col size="12" size-md="6" size-lg="4" class="ion-padding">
-          <div>
-            <!-- style="border: 1px solid white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 2, 0.1); background: white;" -->
-            
-            <img 
-              [src]="anuncio.imagen" 
-              alt="Imagen del Anuncio" 
-              style="width: 100%; height: auto; display: block;" 
-            />
-
+          <div>            
+            <img  [src]="anuncio.imagen" alt="Imagen del Anuncio" style="width: 100%; height: auto; display: block;" />
+            <strong>Titulo:</strong>
+                {{ anuncio.titulo }} <br>
+            <strong>Descripcion:</strong>
+              {{ anuncio.descripcion }} <br>
+            <strong>Tipo de Anuncio:</strong>
+              {{ anuncio.tipo }}
           </div>
         </ion-col>
-
-
       }
     </ion-row>
   </ion-grid>
