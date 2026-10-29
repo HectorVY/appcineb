@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>tab4</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-list>
+  <ion-item>
+    <ion-select label="Peliculas" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Seleccione">
+      @for(pelicula of peliculas; track pelicula.idPelicula){
+      <ion-select-option value="text">{{pelicula.titulo}}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tab4</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <ion-item>
+    <ion-select label="Salas Disponibles" [interfaceOptions]="customAlertOptions1" interface="alert" placeholder="Seleccione">
+      @for(sala of salas; track sala.idSala){
+      <ion-select-option value="text">{{sala.nombre}}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-select label="Funciones" [interfaceOptions]="customAlertOptions2" interface="alert" placeholder="Seleccione" (ionChange)="cambioFecha($event)">
+      @for(fecha of fechas; track fecha){
+      <ion-select-option [value]="fecha">{{fecha | date}}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-select label="Horas Disponibles" [interfaceOptions]="customAlertOptions3" interface="alert" placeholder="Seleccione">
+      @for(hore of horas; track hore.idFuncion){
+      <ion-select-option [value]="hore.idFuncion">{{hore.hora}}</ion-select-option>
+      }
+    </ion-select>
+  </ion-item>
+</ion-list>
