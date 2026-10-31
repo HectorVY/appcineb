@@ -8,9 +8,9 @@
   </ion-item>
 
   <ion-item>
-    <ion-select label="Salas Disponibles" [interfaceOptions]="customAlertOptions1" interface="alert" placeholder="Seleccione">
+    <ion-select label="Salas Disponibles" [interfaceOptions]="customAlertOptions1" interface="alert" placeholder="Seleccione" [(ngModel)]="salaSeleccionada" (ionChange)="generarRangosAsientos()">
       @for(sala of salas; track sala.idSala){
-      <ion-select-option value="text">{{sala.nombre}}</ion-select-option>
+      <ion-select-option [value]="sala">{{sala.nombre}}</ion-select-option>
       }
     </ion-select>
   </ion-item>
@@ -24,10 +24,41 @@
   </ion-item>
 
   <ion-item>
-    <ion-select label="Horas Disponibles" [interfaceOptions]="customAlertOptions3" interface="alert" placeholder="Seleccione">
+    <ion-select label="Horas Disponibles" [interfaceOptions]="customAlertOptions3" interface="alert" placeholder="Seleccione" [(ngModel)]="funcionSeleccionada" (ionChange)="calcularTotal()">
       @for(hore of horas; track hore.idFuncion){
-      <ion-select-option [value]="hore.idFuncion">{{hore.hora}}</ion-select-option>
+      <ion-select-option [value]="hore">{{hore.hora}}</ion-select-option>
       }
     </ion-select>
   </ion-item>
+
+  @if(salaSeleccionada && funcionSeleccionada){
+    <ion-item>
+      <ion-select label="Seleccione Fila" [interfaceOptions]="customAlertOptions4" interface="alert" placeholder="Seleccione" [(ngModel)]="filaSeleccionada">
+        @for(f of listaFilas; track f){
+          <ion-select-option [value]="f">Fila {{f}}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-select label="Seleccione Asiento" [interfaceOptions]="customAlertOptions5" interface="alert" placeholder="Seleccione" [multiple]="true" [(ngModel)]="asientosSeleccionados" (ionChange)="calcularTotal()">
+        @for(a of listaAsientos; track a){
+          <ion-select-option [value]="a">Asiento {{a}}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+
+    <div style="padding: 16px 16px 0 16px; font-size: 14px;">
+      <p>Precio por Entrada: <b>${{funcionSeleccionada.precioEntrada}}</b></p>
+      @if(totalAPagar > 0){
+        <p>Total a Pagar ({{asientosSeleccionados.length}} entradas): <b style="color: #2dd36f;">${{totalAPagar}}</b></p>
+      }
+    </div>
+  }
 </ion-list>
+
+@if(filaSeleccionada && asientosSeleccionados.length > 0){
+  <ion-button color="primary" expand="block" style="margin: 16px;" (click)="guardarReserva()">
+    Ingresar Reserva
+  </ion-button>
+}
